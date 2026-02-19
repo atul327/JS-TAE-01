@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>devLearn · Clay Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* ================= ROOT COLORS ================= */
+
+:root{
+    --bg:#e6e9f0;
+    --card:#f0f3f8;
+    --primary:#6c8cff;
+    --text:#2c2f3a;
+    --shadow-light:rgba(255,255,255,0.8);
+    --shadow-dark:rgba(163,177,198,0.6);
+}
+
+body.dark{
+    --bg:#2e3440;
+    --card:#3b4252;
+    --primary:#88c0d0;
+    --text:#eceff4;
+    --shadow-light:rgba(255,255,255,0.05);
+    --shadow-dark:rgba(0,0,0,0.6);
+}
+
+/* ================= GLOBAL ================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+main{flex:1}
+
+.container{
+    max-width:50%;
+    margin:5% auto;
+    padding:2rem;
+}
+
+/* ================= NAVBAR ================= */
+
+nav{
+    padding:1rem 2rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:var(--card);
+    border-radius:20px;
+    border:2px solid rgba(0,0,0,0.05);
+    box-shadow:
+    8px 8px 18px var(--shadow-dark),
+    -8px -8px 18px var(--shadow-light);
+    position:relative;
+}
+
+.nav-left{
+    padding:.5rem 1.2rem;
+    border-radius:30px;
+    background:var(--card);
+    box-shadow:
+    6px 6px 12px var(--shadow-dark),
+    -6px -6px 12px var(--shadow-light);
+}
+
+.nav-links{
+    list-style:none;
+    display:flex;
+    gap:1.5rem;
+}
+
+.nav-links a, button{
+    text-decoration:none;
+    background:none;
+    border:none;
+    cursor:pointer;
+    color:var(--text);
+    font-weight:500;
+}
+
+/* Hamburger */
+.hamburger{
+    display:none;
+    font-size:1.5rem;
+    cursor:pointer;
+}
+
+.hidden{display:none}
+
+/* ================= CLAY EFFECT ================= */
+
+.card, .split-page, .form-panel{
+    background:var(--card);
+    border-radius:25px;
+    box-shadow:
+    10px 10px 20px var(--shadow-dark),
+    -10px -10px 20px var(--shadow-light);
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    text-align:center;
+    padding:3rem 0;
+}
+
+.hero h1{
+    font-size:2.5rem;
+    margin-bottom:1rem;
+}
+
+.btn{
+    background:var(--primary);
+    padding:.8rem 2rem;
+    border-radius:40px;
+    border:none;
+    color:white;
+    cursor:pointer;
+    box-shadow:
+    5px 5px 12px var(--shadow-dark),
+    -5px -5px 12px var(--shadow-light);
+}
+
+/* ================= CARDS ================= */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:2rem;
+    margin-top:2rem;
+}
+
+.card{
+    padding:2rem;
+    text-align:center;
+}
+
+/* ================= AUTH ================= */
+
+.split-page{
+    display:flex;
+    overflow:hidden;
+    margin-top:2rem;
+}
+
+.info-panel{
+    flex:1;
+    background:var(--primary);
+    color:white;
+    padding:3rem;
+}
+
+.form-panel{
+    flex:1;
+    padding:3rem;
+}
+
+.form-group{
+    margin-bottom:1rem;
+}
+
+input{
+    width:100%;
+    padding:.8rem;
+    border-radius:30px;
+    border:none;
+    outline:none;
+    background:var(--bg);
+    box-shadow:
+    inset 4px 4px 10px var(--shadow-dark),
+    inset -4px -4px 10px var(--shadow-light);
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    text-align:center;
+    padding:1.5rem;
+    margin-top:3rem;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+    .container{
+        max-width:100%;
+        margin:1rem;
+        padding:1rem;
+    }
+
+    nav{
+        border-radius:0;
+    }
+
+    .hamburger{
+        display:block;
+    }
+
+    .nav-links{
+        position:absolute;
+        top:70px;
+        right:15px;
+        flex-direction:column;
+        background:var(--card);
+        padding:1rem;
+        border-radius:20px;
+        box-shadow:
+        8px 8px 18px var(--shadow-dark),
+        -8px -8px 18px var(--shadow-light);
+        display:none;
+        width:200px;
+    }
+
+    .nav-links.show{
+        display:flex;
+    }
+    .nav-left{
+        box-shadow: none
+    }
+    .split-page{
+        flex-direction:column;
+    }
+
+    .info-panel{
+        padding:2rem;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="nav-left" id="welcome">Welcome, Guest</div>
+
+    <div class="hamburger" id="menuBtn">
+        <i class="fa fa-bars"></i>
+    </div>
+
+    <ul class="nav-links" id="navMenu">
+        <li><a href="#" id="homeBtn">Home</a></li>
+        <li><a href="#" id="loginBtn">Login</a></li>
+        <li><a href="#" id="registerBtn">Register</a></li>
+        <li class="hidden" id="logoutLi"><button id="logoutBtn">Logout</button></li>
+        <li><button id="themeBtn"><i class="fa fa-moon"></i></button></li>
+    </ul>
+</nav>
+
+<main id="main"></main>
+
+<footer>Developed by @Atul Patle</footer>
+
+<script>
+
+let main = document.getElementById("main");
+let welcome = document.getElementById("welcome");
+let logoutLi = document.getElementById("logoutLi");
+let navMenu = document.getElementById("navMenu");
+
+let currentUser = JSON.parse(localStorage.getItem("user")) || null;
+
+/* Mobile Menu */
+document.getElementById("menuBtn").onclick = function(){
+    navMenu.classList.toggle("show");
+};
+
+/* Close menu when click */
+navMenu.onclick = function(){
+    navMenu.classList.remove("show");
+};
+
+/* Theme */
+document.getElementById("themeBtn").onclick = function(){
+    document.body.classList.toggle("dark");
+};
+
+/* Navbar update */
+function updateNav(){
+    if(currentUser){
+        welcome.innerText = "Welcome, " + currentUser.email;
+        logoutLi.classList.remove("hidden");
+    }else{
+        welcome.innerText = "Welcome, Guest";
+        logoutLi.classList.add("hidden");
+    }
+}
+
+/* Home */
+function home(){
+    main.innerHTML = `
+    <div class="container">
+        <div class="hero">
+            <h1>Welcome to My JavaScript Hub</h1>
+            <button class="btn">Start Learning</button>
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <h3>Beginner Friendly</h3>
+                <p>Step by step learning.</p>
+            </div>
+            <div class="card">
+                <h3>Projects</h3>
+                <p>Build real applications.</p>
+            </div>
+            <div class="card">
+                <h3>Strong Concepts</h3>
+                <p>Master JS deeply.</p>
+            </div>
+        </div>
+    </div>`;
+}
+
+/* Auth */
+function auth(type){
+
+main.innerHTML = `
+<div class="container">
+<div class="split-page">
+<div class="info-panel">
+<h2>${type=="login"?"Welcome Back":"Join Us"}</h2>
+<p>Build modern web apps.</p>
+</div>
+<div class="form-panel">
+<form id="form">
+${type=="register"?`
+<div class="form-group">
+<input type="text" id="name" placeholder="Full Name">
+</div>`:""}
+<div class="form-group">
+<input type="email" id="email" placeholder="Email">
+</div>
+<div class="form-group">
+<input type="password" id="pass" placeholder="Password">
+</div>
+${type=="register"?`
+<div class="form-group">
+<input type="password" id="cpass" placeholder="Confirm Password">
+</div>`:""}
+<button class="btn">${type=="login"?"Login":"Register"}</button>
+</form>
+</div>
+</div>
+</div>`;
+
+document.getElementById("form").onsubmit = function(event){
+
+    event.preventDefault();
+
+    var email = document.getElementById("email").value.trim();
+    var pass  = document.getElementById("pass").value.trim();
+
+    var users = localStorage.getItem("users");
+
+    if(users == null){
+        users = [];
+    }else{
+        users = JSON.parse(users);
+    }
+
+    // ================= REGISTER =================
+    if(type == "register"){
+
+        var cpass = document.getElementById("cpass").value.trim();
+
+        if(email == "" || pass == "" || cpass == ""){
+            alert("All fields are required!");
+            return;
+        }
+
+        if(pass != cpass){
+            alert("Password not match!");
+            return;
+        }
+
+        // Check if user already exists
+        for(var i = 0; i < users.length; i++){
+            if(users[i].email == email){
+                alert("User already registered!");
+                return;
+            }
+        }
+
+        var newUser = {
+            email: email,
+            pass: pass
+        };
+
+        users.push(newUser);
+        localStorage.setItem("users", JSON.stringify(users));
+
+        alert("Registered Successfully!");
+        auth("login");
+    }
+
+    // ================= LOGIN =================
+    else{
+
+        if(email == "" || pass == ""){
+            alert("Email and Password required!");
+            return;
+        }
+
+        var foundUser = null;
+
+        for(var i = 0; i < users.length; i++){
+            if(users[i].email == email && users[i].pass == pass){
+                foundUser = users[i];
+                break;
+            }
+        }
+
+        if(foundUser == null){
+            alert("Invalid credentials!");
+            return;
+        }
+
+        currentUser = { email: email };
+        localStorage.setItem("user", JSON.stringify(currentUser));
+
+        updateNav();
+        home();
+    }
+};
+}
+
+document.getElementById("homeBtn").onclick = home;
+document.getElementById("loginBtn").onclick = ()=>auth("login");
+document.getElementById("registerBtn").onclick = ()=>auth("register");
+
+updateNav();
+home();
+
+</script>
+
+</body>
+</html>
